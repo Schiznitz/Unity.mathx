@@ -7,7 +7,6 @@
 using System.Runtime.InteropServices;
 using AOT;
 using Unity.Burst;
-using UnityEditor;
 using UnityEngine;
 using static Unity.Burst.BurstCompiler;
 
@@ -16,7 +15,7 @@ namespace Unity.Mathematics
     [BurstCompile] // Instruct Burst to look for static methods with [BurstCompile] attribute
     public static class OperationInterface
     {
-        
+
         // Interface
         [UnmanagedFunctionPointer(CallingConvention.Cdecl)]
         public delegate float FloatIO(float f); // float in-out
@@ -26,8 +25,8 @@ namespace Unity.Mathematics
         public delegate float3 Float3IO(float3 f);
         [UnmanagedFunctionPointer(CallingConvention.Cdecl)]
         public delegate float4 Float4IO(float4 f);
-        
-        
+
+
         // Interface
         public delegate float FloatIFloatO(float f); // float in-out
         // Interface
@@ -45,9 +44,11 @@ namespace Unity.Mathematics
         [BurstCompile, MonoPInvokeCallback(typeof(FloatIO))]
         public static float mulx2(float a) => a * 2;
         public static FunctionPointer<FloatIO> mulx2Pointer = CompileFunctionPointer<FloatIO>(mulx2);
-
-        [MenuItem("Math/Tests/Miam")]
-        public static void poop(){
+#if UNITY_EDITOR
+        [UnityEditor.MenuItem("Math/Tests/Miam")]
+#endif
+        public static void poop()
+        {
             Debug.Log(mulx2Pointer.Invoke(2.6f));
         }
 
