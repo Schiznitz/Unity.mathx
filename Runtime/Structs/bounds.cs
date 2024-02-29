@@ -1,9 +1,7 @@
 #region Header
-
 // **    Copyright (C) 2023 Nicolas Reinhard, @LTMX. All rights reserved.
 // **    Github Profile: https://github.com/LTMX
-// **    Repository : https://github.com/LTMX/Unity.Mathematics-Extensions
-
+// **    Repository : https://github.com/LTMX/Unity.mathx
 #endregion
 
 using System;
@@ -19,8 +17,8 @@ namespace Unity.Mathematics
     [Serializable]
     public struct bounds : IEquatable<bounds>, IFormattable
     {
-        public float3 Center;
-        public float3 Extents;
+        private float3 Center;
+        private float3 Extents;
 
         private const MethodImplOptions IL = MethodImplOptions.AggressiveInlining;
 

@@ -1,7 +1,7 @@
 #region Header
 // **    Copyright (C) 2023 Nicolas Reinhard, @LTMX. All rights reserved.
 // **    Github Profile: https://github.com/LTMX
-// **    Repository : https://github.com/LTMX/Unity.Mathematics-Extensions
+// **    Repository : https://github.com/LTMX/Unity.mathx
 #endregion
 
 using Unity.Burst;
@@ -70,7 +70,7 @@ namespace Unity.Mathematics
             if (p.x < p.y.max(p.z)) p = p.yzx;
             if (p.x < p.y.max(p.z)) p = p.yzx;
             var b =
-                p.dot(f3one.norm())
+                p.dot(onef3.norm())
                     .max(p.xz.dot(f2(PHI + 1, 1).norm()))
                     .max(p.yx.dot(f2(1, PHI).norm()))
                     .max(p.xz.dot(f2(1, PHI).norm()));
@@ -437,12 +437,12 @@ namespace Unity.Mathematics
         
 
         // The "Chamfer" flavour makes a 45-degree chamfered edge (the diagonal of a square of size <r>):
-        private static float fOpUnionChamfer(float a, float b, float r) => a.min(b).min((a - r + b) * SQRT2_2);
+        private static float fOpUnionChamfer(float a, float b, float r) => a.min(b).min((a - r + b) * HalfSQRT2);
 
         // Intersection has to deal with what is normally the inside of the resulting object
         // when using union, which we normally don't care about too much. Thus, intersection
         // implementations sometimes differ from union implementations.
-        private static float fOpIntersectionChamfer(float a, float b, float r) => a.max(b).max((a + r + b) * SQRT2_2);
+        private static float fOpIntersectionChamfer(float a, float b, float r) => a.max(b).max((a + r + b) * HalfSQRT2);
 
         // Difference can be built from Intersection or Union:
         private static float fOpDifferenceChamfer(float a, float b, float r) => fOpIntersectionChamfer(a, -b, r);
@@ -471,7 +471,7 @@ namespace Unity.Mathematics
                 var p = f2(a, b);
                 var columnradius = r * SQRT2 / ((n - 1) * 2 + SQRT2);
                 p.pR45();
-                p.x -= SQRT2_2 * r;
+                p.x -= HalfSQRT2 * r;
                 p.x += columnradius * SQRT2;
                 if (n.mod(2).approx(1)) 
                     p.y += columnradius;
@@ -499,8 +499,8 @@ namespace Unity.Mathematics
 
             p.pR45();
             p.y += columnradius;
-            p.x -= SQRT2_2 * r;
-            p.x -= SQRT2_2 * columnradius;
+            p.x -= HalfSQRT2 * r;
+            p.x -= HalfSQRT2 * columnradius;
 
             if (n.mod(2).approx(1)) 
                 p.y += columnradius;
@@ -543,7 +543,7 @@ namespace Unity.Mathematics
         private static float fOpPipe(float a, float b, float r) => f2(a, b).length() - r;
 
         // first object gets a v-shaped engraving where it intersect the second
-        private static float fOpEngrave(float a, float b, float r) => a.max((a + r - b.abs()) * SQRT2_2);
+        private static float fOpEngrave(float a, float b, float r) => a.max((a + r - b.abs()) * HalfSQRT2);
 
         // first object gets a capenter-style groove cut out
         private static float fOpGroove(float a, float b, float ra, float rb) => a.max((a + ra).min(rb - b.abs()));

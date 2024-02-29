@@ -1,9 +1,7 @@
 ﻿#region Header
-
 // **    Copyright (C) 2023 Nicolas Reinhard, @LTMX. All rights reserved.
 // **    Github Profile: https://github.com/LTMX
-// **    Repository : https://github.com/LTMX/Unity.Mathematics-Extensions
-
+// **    Repository : https://github.com/LTMX/Unity.mathx
 #endregion
 
 using System.Runtime.CompilerServices;
@@ -44,7 +42,7 @@ namespace Unity.Mathematics
         [MethodImpl(IL)] public static float4x4 rotateAround(this float4x4 localToWorld, float3 center, float3 axis, float angle) {
             var initialRot = localToWorld.quaternion();
             var rotAmount = quaternion(axis, angle);
-            var finalPos = center + rotAmount.rotate(localToWorld.translation() - center);
+            var finalPos = center + rotAmount.rotate(localToWorld.translationMatrix() - center);
             var finalRot = initialRot.mul(initialRot.inverse().mul(rotAmount)).mul(initialRot);
             return new float4x4(finalRot, finalPos);
         }

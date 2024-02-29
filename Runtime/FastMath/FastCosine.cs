@@ -1,9 +1,7 @@
 #region Header
-
 // **    Copyright (C) 2023 Nicolas Reinhard, @LTMX. All rights reserved.
 // **    Github Profile: https://github.com/LTMX
-// **    Repository : https://github.com/LTMX/Unity.Mathematics-Extensions
-
+// **    Repository : https://github.com/LTMX/Unity.mathx
 #endregion
 
 using System.Runtime.CompilerServices;
@@ -30,11 +28,11 @@ namespace Unity.Mathematics
             x -= HPI;
             return (x - x * x * x * b) * a;
         }
-        [MethodImpl(IL)] public static float CosLoop(this int x) => (x % PI2 - x).abs() - HPI;
+        [MethodImpl(IL)] public static float CosLoop(this int x) => (x % TwoPI - x).abs() - HPI;
         
         [MethodImpl(IL)] public static float SinLoop(this int y) {
             var x = y - HPI;
-            return (x % PI2 - x).abs() - HPI;
+            return (x % TwoPI - x).abs() - HPI;
         }
         // Overloads
         [MethodImpl(IL)]

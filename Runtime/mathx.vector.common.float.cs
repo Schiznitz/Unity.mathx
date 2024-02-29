@@ -1,10 +1,12 @@
 ﻿#region Header
 // **    Copyright (C) 2023 Nicolas Reinhard, @LTMX. All rights reserved.
 // **    Github Profile: https://github.com/LTMX
-// **    Repository : https://github.com/LTMX/Unity.Mathematics-Extensions
+// **    Repository : https://github.com/LTMX/Unity.mathx
 #endregion
 
+using System;
 using System.Runtime.CompilerServices;
+using UnityEngine;
 
 namespace Unity.Mathematics
 {
@@ -39,7 +41,6 @@ namespace Unity.Mathematics
         /// <inheritdoc cref="math.distancesq(float4,float4)"/>
         [MethodImpl(IL)] public static float distancesq(this float4 f, float4 f2) => math.distancesq(f, f2);
 
-        
         /// <inheritdoc cref="math.length(float4)"/>
         [MethodImpl(IL)] public static float length(this float4 f) => math.length(f);
         /// <inheritdoc cref="math.length(float3)"/>

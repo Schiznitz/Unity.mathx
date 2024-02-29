@@ -1,7 +1,7 @@
 #region Header
 // **    Copyright (C) 2023 Nicolas Reinhard, @LTMX. All rights reserved.
 // **    Github Profile: https://github.com/LTMX
-// **    Repository : https://github.com/LTMX/Unity.Mathematics-Extensions
+// **    Repository : https://github.com/LTMX/Unity.mathx
 #endregion
 
 using System;
@@ -9,7 +9,7 @@ using System.Runtime.InteropServices;
 using Unity.Burst;
 using Unity.Collections;
 using Unity.Jobs;
-using static Unity.Mathematics.OperationInterface;
+using static Unity.Mathematics.FunctionPointers.Signature;
 
 namespace Unity.Mathematics // Should be defined in the assembly definition // Jobify namespace
 {
@@ -21,12 +21,12 @@ namespace Unity.Mathematics // Should be defined in the assembly definition // J
         {
             [ReadOnly] public readonly float Input;
             public float Output;
-            public FunctionPointer<FloatIO> FunctionPointer;
+            public FunctionPointer<f1_f1> FunctionPointer;
             public void Execute() {
                 Output = FunctionPointer.Invoke(Input);
             }
 
-            public Jobified(FunctionPointer<FloatIO> functionPointer, float input)
+            public Jobified(FunctionPointer<f1_f1> functionPointer, float input)
             {
                 FunctionPointer = functionPointer;
                 Input = input;

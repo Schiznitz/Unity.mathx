@@ -1,7 +1,7 @@
 ﻿#region Header
 // **    Copyright (C) 2023 Nicolas Reinhard, @LTMX. All rights reserved.
 // **    Github Profile: https://github.com/LTMX
-// **    Repository : https://github.com/LTMX/Unity.Mathematics-Extensions
+// **    Repository : https://github.com/LTMX/Unity.mathx
 #endregion
 
 using System;
@@ -48,7 +48,7 @@ namespace Unity.Mathematics
         public Attribute Process() => new BurstCompileAttribute(FloatPrecision.Low, FloatMode.Fast);
     }
     
-    public class BurstPerforbanceAttribute : Attribute
+    public class BurstPerformanceAttribute : Attribute
     {
         public Attribute Process() => new BurstCompileAttribute { OptimizeFor = OptimizeFor.Performance };
     }
